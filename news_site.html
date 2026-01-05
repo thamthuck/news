@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[속보] 일본 최대 조직 '북진회' 핵심 인물 다수 사망… 한국인 최 모 씨 실종 - 일간 시사</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+            background-color: #f8f9fa;
+            color: #222;
+            line-height: 1.7;
+        }
+
+        .top-utility {
+            background-color: #f1f3f5;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .top-utility-inner {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #current-date {
+            font-weight: 500;
+        }
+
+        .utility-links a {
+            margin-left: 15px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .utility-links a:hover {
+            color: #000;
+        }
+
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid #e9ecef;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        }
+
+        .header-main {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 20px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: 900;
+            color: #212529;
+            letter-spacing: -2px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .search-icon, .menu-icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            color: #495057;
+        }
+
+        nav {
+            background-color: #fff;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .nav-inner {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-menu li {
+            padding: 16px 0;
+        }
+
+        .nav-menu a {
+            color: #495057;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover {
+            color: #000;
+        }
+
+        .main-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 40px;
+        }
+
+        .article-section {
+            background-color: #fff;
+            padding: 50px;
+        }
+
+        .article-category {
+            display: inline-block;
+            color: #d63031;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .article-title {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.35;
+            color: #212529;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            border-top: 1px solid #e9ecef;
+            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 30px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .reporter-name {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .social-share {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f1f3f5;
+        }
+
+        .share-btn {
+            padding: 8px 16px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #495057;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .share-btn:hover {
+            background-color: #f8f9fa;
+            border-color: #adb5bd;
+        }
+
+        .article-body {
+            font-size: 17px;
+            line-height: 1.85;
+            color: #212529;
+        }
+
+        .article-body p {
+            margin-bottom: 28px;
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .tag {
+            padding: 6px 12px;
+            background-color: #f1f3f5;
+            color: #495057;
+            font-size: 13px;
+            border-radius: 3px;
+            text-decoration: none;
+        }
+
+        .tag:hover {
+            background-color: #e9ecef;
+        }
+
+        .reporter-box {
+            background-color: #f8f9fa;
+            padding: 24px;
+            margin-top: 40px;
+            border-radius: 8px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .reporter-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .reporter-info h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #212529;
+        }
+
+        .reporter-info p {
+            font-size: 14px;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        aside {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            background-color: #fff;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid #e9ecef;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #212529;
+        }
+
+        .sidebar-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f3f5;
+            font-size: 14px;
+            color: #495057;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .sidebar-item:hover {
+            color: #000;
+        }
+
+        .sidebar-item:last-child {
+            border-bottom: none;
+        }
+
+        .comments-section {
+            background-color: #fff;
+            padding: 40px 50px;
+            margin-top: 50px;
+        }
+
+        .comments-header {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .comment-count {
+            color: #d63031;
+        }
+
+        .comment-input-area {
+            margin-bottom: 30px;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 15px;
+            margin-bottom: 12px;
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .comment-input:focus {
+            outline: none;
+            border-color: #495057;
+        }
+
+        .comment-input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .comment-name-input {
+            flex: 1;
+            padding: 10px 16px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .comment-name-input:focus {
+            outline: none;
+            border-color: #495057;
+        }
+
+        .comment-submit {
+            padding: 10px 24px;
+            background-color: #212529;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .comment-submit:hover {
+            background-color: #000;
+        }
+
+        .comment-list {
+            margin-top: 30px;
+        }
+
+        .comment-item {
+            padding: 20px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comment-time {
+            font-size: 12px;
+            color: #6c757d;
+            font-weight: normal;
+        }
+
+        .comment-text {
+            color: #495057;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .related-articles {
+            background-color: #f8f9fa;
+            padding: 40px 50px;
+            margin-top: 50px;
+        }
+
+        .related-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .related-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .related-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background-color: #fff;
+            border: 1px solid #e9ecef;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+
+        .related-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .related-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: #adb5bd;
+            min-width: 30px;
+        }
+
+        .related-content {
+            flex: 1;
+        }
+
+        .related-item-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 4px;
+        }
+
+        .related-item-time {
+            font-size: 12px;
+            color: #868e96;
+        }
+
+        footer {
+            background-color: #212529;
+            color: #adb5bd;
+            padding: 50px 0;
+            margin-top: 60px;
+        }
+
+        .footer-inner {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .footer-info {
+            font-size: 13px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .footer-info a {
+            color: #adb5bd;
+            text-decoration: none;
+        }
+
+        .footer-info a:hover {
+            color: #fff;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: #6c757d;
+            padding-top: 20px;
+            border-top: 1px solid #343a40;
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            aside {
+                display: none;
+            }
+
+            .article-section {
+                padding: 30px;
+            }
+
+            .article-title {
+                font-size: 28px;
+            }
+
+            .article-body {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: 20px;
+                overflow-x: auto;
+            }
+
+            .article-section {
+                padding: 20px;
+            }
+
+            .article-title {
+                font-size: 24px;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .related-articles, .comments-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-utility">
+        <div class="top-utility-inner">
+            <div id="current-date"></div>
+            <div class="utility-links">
+                <a href="#">로그인</a>
+                <a href="#">회원가입</a>
+                <a href="#">구독</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-main">
+            <div class="logo">일간 시사</div>
+            <div class="header-actions">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-inner">
+            <ul class="nav-menu">
+                <li><a href="#">속보</a></li>
+                <li><a href="#">정치</a></li>
+                <li><a href="#">경제</a></li>
+                <li><a href="#">사회</a></li>
+                <li><a href="#">국제</a></li>
+                <li><a href="#">문화</a></li>
+                <li><a href="#">IT/과학</a></li>
+                <li><a href="#">오피니언</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <main>
+            <article class="article-section">
+                <div class="article-category">속보</div>
+                
+                <h1 class="article-title">일본 최대 조직 '북진회' 핵심 인물 다수 사망… 한국인 최 모 씨 실종</h1>
+                
+                <div class="article-meta">
+                    <div class="meta-item">
+                        <span class="reporter-name">김새삼 기자</span>
+                    </div>
+                    <div class="meta-item">@thamthuck</div>
+                    <div class="meta-item">입력 2025.10.03</div>
+                </div>
+
+                <div class="social-share">
+                    <button class="share-btn" onclick="shareTwitter()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                        </svg>
+                        트위터
+                    </button>
+                    <button class="share-btn" onclick="shareFacebook()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                        </svg>
+                        페이스북
+                    </button>
+                    <button class="share-btn" onclick="copyLink()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"></path>
+                            <polyline points="16 6 12 2 8 6"></polyline>
+                            <line x1="12" y1="2" x2="12" y2="15"></line>
+                        </svg>
+                        공유
+                    </button>
+                </div>
+
+                <div class="article-body">
+                    <p>마카오 인근 해상에서 카지노 크루즈를 운영하던 일본 최대 범죄 조직 '북진회'에 대한 한일 경찰 당국의 합동 소탕 작전이 전격 실시됐다.</p>
+
+                    <p>이번 작전으로 북진회 핵심 간부 12명이 현장에서 사망했으며, 조직원 47명이 체포되는 등 조직 지휘부가 사실상 와해됐다. 특히 조직의 막후 실세로 알려진 가네코 치요(78)도 현장에서 검거되며 수사에 급물살을 타고 있다.</p>
+
+                    <p>이번 검거 작전에는 잠입 수사를 진행하던 한국 경찰청 소속 신 모 경위(34)가 결정적인 역할을 한 것으로 밝혀졌다. 경찰청은 신 경위의 공로를 인정해 특별 표창을 수여할 예정이라고 발표했다.</p>
+
+                    <p>한편, 북진회와 연루된 의혹을 받고 있는 한국인 최 모 씨(32)는 작전 당일 현장에서 실종되어 현재까지 행방이 묘연한 상태다. 조사 결과 최 씨는 과거 서울경찰청 소속 경찰관이었으나, 조직에 투입된 이후 연락이 두절되었던 것으로 확인됐다.</p>
+
+                    <p>경찰 당국은 실종된 최 씨를 추적하기 위해 전국에 수배령을 내리는 한편, 구체적인 사건 경위에 대해 심층 수사를 이어가고 있다.</p>
+                </div>
+
+                <div class="article-tags">
+                    <a href="#" class="tag">#북진회</a>
+                    <a href="#" class="tag">#한일합동수사</a>
+                    <a href="#" class="tag">#범죄조직</a>
+                    <a href="#" class="tag">#마카오</a>
+                    <a href="#" class="tag">#카지노크루즈</a>
+                    <a href="#" class="tag">#실종</a>
+                </div>
+
+                <div class="comments-section">
+                    <div class="comments-header">
+                        댓글 <span class="comment-count" id="commentCount">0</span>
+                    </div>
+                    <div class="comment-input-area">
+                        <input type="text" class="comment-name-input" id="commentName" placeholder="이름을 입력하세요">
+                        <textarea class="comment-input" id="commentText" placeholder="댓글을 입력하세요..."></textarea>
+                        <button class="comment-submit" onclick="addComment()">댓글 작성</button>
+                    </div>
+                    
+                    <div class="comment-list" id="commentList">
+                    </div>
+                </div>
+
+                <div class="related-articles">
+                    <div class="related-title">관련기사</div>
+                    <div class="related-list">
+                        <div class="related-item">
+                            <div class="related-number">1</div>
+                            <div class="related-content">
+                                <div class="related-item-title">북진회 조직원 47명 긴급 체포…경찰 "추가 검거 예정"</div>
+                                <div class="related-item-time">2시간 전</div>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <div class="related-number">2</div>
+                            <div class="related-content">
+                                <div class="related-item-title">한일 합동 수사, 수 개월간 비밀 작전 전개</div>
+                                <div class="related-item-time">3시간 전</div>
+                            </div>
+                        </div>
+                        <div class="related-item">
+                            <div class="related-number">3</div>
+                            <div class="related-content">
+                                <div class="related-item-title">실종 경찰관 최모 씨, 조직 침투 3년차</div>
+                                <div class="related-item-time">4시간 전</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <aside>
+            <div class="sidebar-section">
+                <div class="sidebar-title">실시간 주요뉴스</div>
+                <div class="sidebar-item">북진회 사건, 국제 공조 수사의 성과</div>
+                <div class="sidebar-item">경찰청, 잠입수사 신모 경찰관 표창</div>
+                <div class="sidebar-item">마카오 카지노 크루즈 단속 현장</div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">많이 본 뉴스</div>
+                <div class="sidebar-item">실종 최모 씨, 조직 내부 정보원 역할 추정</div>
+                <div class="sidebar-item">북진회 와해, 동아시아 범죄 조직 지형 변화</div>
+                <div class="sidebar-item">가네코 치요 검거, 30년 추적 끝 체포</div>
+                <div class="sidebar-item">한일 경찰, 1년간 합동 작전 준비</div>
+                <div class="sidebar-item">최모 씨 가족 "빨리 돌아오길" 호소</div>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo">일간 시사</div>
+            <div class="footer-info">
+                @thamthuck<br>
+                홈 | <a href="https://x.com/thamthuck" target="_blank">https://x.com/thamthuck</a><br>
+                제보 | <a href="https://spin-spin.com/thamthuck" target="_blank">https://spin-spin.com/thamthuck</a>
+            </div>
+            <div class="footer-links">
+                <a href="#">회사소개</a>
+                <a href="#">이용약관</a>
+                <a href="#">개인정보처리방침</a>
+                <a href="#">청소년보호정책</a>
+                <a href="#">광고안내</a>
+                <a href="#">고객센터</a>
+            </div>
+            <div class="copyright">
+                Copyright © 새삼. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 현재 날짜 표시
+        const now = new Date();
+        const days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const date = now.getDate();
+        const day = days[now.getDay()];
+        
+        document.getElementById('current-date').textContent = 
+            `${year}년 ${month}월 ${date}일 ${day}`;
+
+        // 댓글 추가 기능
+        function addComment() {
+            const nameInput = document.getElementById('commentName');
+            const textInput = document.getElementById('commentText');
+            const commentList = document.getElementById('commentList');
+            const commentCount = document.getElementById('commentCount');
+            
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+            
+            if (!name) {
+                alert('이름을 입력해주세요.');
+                return;
+            }
+            
+            if (!text) {
+                alert('댓글 내용을 입력해주세요.');
+                return;
+            }
+            
+            // 새 댓글 생성
+            const newComment = document.createElement('div');
+            newComment.className = 'comment-item';
+            newComment
