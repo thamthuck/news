@@ -772,11 +772,9 @@
     </footer>
 
     <script type="module">
-      // 1. 사용할 라이브러리 불러오기
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
       import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
     
-      // 2. 제공해주신 Firebase 설정 적용
       const firebaseConfig = {
         apiKey: "AIzaSyBa4rnAa62RKLkC7Mqs-sCZmY-hHi9by3M",
         authDomain: "news-th.firebaseapp.com",
@@ -787,56 +785,46 @@
         measurementId: "G-WH4KN79VLS"
       };
     
-      // 3. Firebase 및 데이터베이스 초기화
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
       const commentCol = collection(db, "comments");
     
-      // --- 날짜 표시 함수 ---
-      const displayDate = () => {
-        const now = new Date();
-        const days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-        const dateStr = `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일 ${days[now.getDay()]}`;
-        document.getElementById('current-date').textContent = dateStr;
-      };
-      displayDate();
+      // 1. 날짜 표시
+      const now = new Date();
+      const days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+      document.getElementById('current-date').textContent = `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일 ${days[now.getDay()]}`;
     
-      // --- 4. 댓글 불러오기 (실시간 수신) ---
-      // 누군가 댓글을 쓰면 모든 사람의 화면에 즉시 나타납니다.
+      // 2. 실시간 댓글 불러오기
       const q = query(commentCol, orderBy("time", "desc"));
       onSnapshot(q, (snapshot) => {
         const commentList = document.getElementById('commentList');
-        const commentCount = document.getElementById('commentCount');
-        
-        commentCount.textContent = snapshot.size;
+        document.getElementById('commentCount').textContent = snapshot.size;
         commentList.innerHTML = '';
     
         snapshot.forEach((doc) => {
           const item = doc.data();
           const timeStr = item.time ? item.time.toDate().toLocaleString() : "방금 전";
-          
           const div = document.createElement('div');
           div.className = 'comment-item';
           div.innerHTML = `
             <div class="comment-author">
-              <span><strong>${item.name}</strong> <span class="comment-time" style="font-size:12px; color:#888; margin-left:10px;">${timeStr}</span></span>
+              <strong>${item.name}</strong> <span class="comment-time" style="margin-left:10px;">${timeStr}</span>
             </div>
-            <div class="comment-text" style="margin-top:5px;">${item.text}</div>
+            <div class="comment-text">${item.text}</div>
           `;
           commentList.appendChild(div);
         });
       });
     
-      // --- 5. 댓글 저장 함수 (전역 등록) ---
+      // 3. 댓글 추가 함수 (window에 등록하여 버튼에서 클릭 가능하게 함)
       window.addComment = async function() {
         const nameInput = document.getElementById('commentName');
         const textInput = document.getElementById('commentText');
-        
         const name = nameInput.value.trim();
         const text = textInput.value.trim();
-        
+    
         if (!name || !text) {
-          alert('이름과 내용을 모두 입력해주세요.');
+          alert('이름과 내용을 입력해주세요.');
           return;
         }
     
@@ -844,27 +832,18 @@
           await addDoc(commentCol, {
             name: name,
             text: text,
-            time: serverTimestamp() 
+            time: serverTimestamp()
           });
           nameInput.value = '';
           textInput.value = '';
         } catch (e) {
-          console.error(e);
-          alert("댓글 작성에 실패했습니다.");
+          console.error("Error adding document: ", e);
+          alert("전송 실패! Firebase Rules 설정을 확인하세요.");
         }
       };
-    </script>
-        
-
     
-        // SNS 공유 함수들
-        function shareTwitter() {
-            window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(document.title)}`, '_blank');
-        }
-        function shareFacebook() {
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
-        }
-        function copyLink() {
-            navigator.clipboard.writeText(window.location.href).then(() => alert('링크가 복사되었습니다.'));
-        }
+      // 4. SNS 공유 함수 등록
+      window.shareTwitter = () => window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(document.title)}`, '_blank');
+      window.shareFacebook = () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
+      window.copyLink = () => navigator.clipboard.writeText(window.location.href).then(() => alert('링크 복사 완료!'));
     </script>
