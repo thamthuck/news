@@ -771,85 +771,91 @@
         </div>
     </footer>
 
-    <script>
-        // 1. 페이지 로드 시 날짜 표시 및 저장된 댓글 불러오기
-        window.onload = function() {
-            displayDate();
-            loadComments();
-        };
+    <script type="module">
+      // 1. 사용할 라이브러리 불러오기
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
     
-        // 날짜 표시 함수
-        function displayDate() {
-            const now = new Date();
-            const days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-            const dateStr = `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일 ${days[now.getDay()]}`;
-            document.getElementById('current-date').textContent = dateStr;
+      // 2. 제공해주신 Firebase 설정 적용
+      const firebaseConfig = {
+        apiKey: "AIzaSyBa4rnAa62RKLkC7Mqs-sCZmY-hHi9by3M",
+        authDomain: "news-th.firebaseapp.com",
+        projectId: "news-th",
+        storageBucket: "news-th.firebasestorage.app",
+        messagingSenderId: "208427009898",
+        appId: "1:208427009898:web:3c8960265a489dfcb38713",
+        measurementId: "G-WH4KN79VLS"
+      };
+    
+      // 3. Firebase 및 데이터베이스 초기화
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const commentCol = collection(db, "comments");
+    
+      // --- 날짜 표시 함수 ---
+      const displayDate = () => {
+        const now = new Date();
+        const days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+        const dateStr = `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일 ${days[now.getDay()]}`;
+        document.getElementById('current-date').textContent = dateStr;
+      };
+      displayDate();
+    
+      // --- 4. 댓글 불러오기 (실시간 수신) ---
+      // 누군가 댓글을 쓰면 모든 사람의 화면에 즉시 나타납니다.
+      const q = query(commentCol, orderBy("time", "desc"));
+      onSnapshot(q, (snapshot) => {
+        const commentList = document.getElementById('commentList');
+        const commentCount = document.getElementById('commentCount');
+        
+        commentCount.textContent = snapshot.size;
+        commentList.innerHTML = '';
+    
+        snapshot.forEach((doc) => {
+          const item = doc.data();
+          const timeStr = item.time ? item.time.toDate().toLocaleString() : "방금 전";
+          
+          const div = document.createElement('div');
+          div.className = 'comment-item';
+          div.innerHTML = `
+            <div class="comment-author">
+              <span><strong>${item.name}</strong> <span class="comment-time" style="font-size:12px; color:#888; margin-left:10px;">${timeStr}</span></span>
+            </div>
+            <div class="comment-text" style="margin-top:5px;">${item.text}</div>
+          `;
+          commentList.appendChild(div);
+        });
+      });
+    
+      // --- 5. 댓글 저장 함수 (전역 등록) ---
+      window.addComment = async function() {
+        const nameInput = document.getElementById('commentName');
+        const textInput = document.getElementById('commentText');
+        
+        const name = nameInput.value.trim();
+        const text = textInput.value.trim();
+        
+        if (!name || !text) {
+          alert('이름과 내용을 모두 입력해주세요.');
+          return;
         }
     
-        // 2. 댓글 추가 함수
-        function addComment() {
-            const nameInput = document.getElementById('commentName');
-            const textInput = document.getElementById('commentText');
-            
-            const name = nameInput.value.trim();
-            const text = textInput.value.trim();
-            
-            if (!name || !text) {
-                alert('이름과 내용을 모두 입력해주세요.');
-                return;
-            }
-    
-            // 새 댓글 객체 (고유 ID 포함)
-            const newComment = {
-                id: Date.now(),
-                name: name,
-                text: text,
-                time: new Date().toLocaleString()
-            };
-    
-            // 로컬스토리지에서 기존 댓글 가져오기
-            const savedData = localStorage.getItem('news_comments_data');
-            const comments = savedData ? JSON.parse(savedData) : [];
-            
-            // 새 댓글을 배열 앞에 추가
-            comments.unshift(newComment);
-            
-            // 로컬스토리지에 문자열로 저장 (핵심!)
-            localStorage.setItem('news_comments_data', JSON.stringify(comments));
-    
-            // 입력창 비우고 화면 새로고침 없이 다시 그리기
-            nameInput.value = '';
-            textInput.value = '';
-            loadComments();
+        try {
+          await addDoc(commentCol, {
+            name: name,
+            text: text,
+            time: serverTimestamp() 
+          });
+          nameInput.value = '';
+          textInput.value = '';
+        } catch (e) {
+          console.error(e);
+          alert("댓글 작성에 실패했습니다.");
         }
-    
-        // 3. 댓글 불러오기 함수
-        function loadComments() {
-            const commentList = document.getElementById('commentList');
-            const commentCount = document.getElementById('commentCount');
-            
-            const savedData = localStorage.getItem('news_comments_data');
-            const comments = savedData ? JSON.parse(savedData) : [];
-            
-            // 숫자 업데이트
-            commentCount.textContent = comments.length;
-            
-            // 목록 초기화 후 생성
-            commentList.innerHTML = '';
-            
-            comments.forEach(function(item) {
-                const div = document.createElement('div');
-                div.className = 'comment-item';
-                div.innerHTML = `
-                    <div class="comment-author" style="display:flex; justify-content:space-between; align-items:center;">
-                        <span><strong>${item.name}</strong> <span class="comment-time" style="font-size:12px; color:#888; margin-left:10px;">${item.time}</span></span>
-                        <button onclick="deleteComment(${item.id})" style="background:none; border:none; color:#d63031; cursor:pointer; font-size:12px;">삭제</button>
-                    </div>
-                    <div class="comment-text" style="margin-top:5px;">${item.text}</div>
-                `;
-                commentList.appendChild(div);
-            });
-        }
+      };
+    </script>
+        
+
     
         // SNS 공유 함수들
         function shareTwitter() {
