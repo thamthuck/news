@@ -807,3 +807,26 @@
             const newComment = document.createElement('div');
             newComment.className = 'comment-item';
             newComment
+            
+        // 공유 기능
+        function shareTwitter() {
+            const url = window.location.href;
+            const text = document.title;
+            const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+            window.open(twitterUrl, '_blank');
+        }
+        
+        function shareFacebook() {
+            const url = window.location.href;
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+            window.open(facebookUrl, '_blank');
+        }
+        
+        function copyLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('링크가 복사되었습니다.');
+            }).catch(err => {
+                alert('링크 복사에 실패했습니다.');
+            });
+        }
